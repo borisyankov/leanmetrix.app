@@ -3,36 +3,63 @@
 
 <head>
     <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/angular/angular-messages.js"></script>
+
     <script src="../lib/firebase/firebase.js"></script>
     <script src="../lib/firebase/angularfire.js"></script>
 
     <script src="app.js"></script>
+
+    <style>
+        .ng-invalid {
+            border-color: red;
+            outline-color: red;
+        }
+        .ng-valid {
+            border-color: green;
+            outline-color: green;
+        }
+        .messages {
+            font-size: smaller;
+            padding-top: 5px;
+            padding-bottom: 10px;
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
     <div ng-controller="signinCtrl as signin">
         <form name="form" novalidate ng-submit="signin.submit(form.$valid)">
-            <input name="email" type="email" ng-model="signin.user.email" required>
+            <input name="email" type="email" placeholder="Email" ng-model="signin.user.email" required>
             <div ng-messages="form.email.$error" ng-messages-include="messages.html"></div>
+            <div ng-messages="form.email.$error">
+                <div ng-message="required">
+                    You can't leave this empty.
+                </div>
+                <div ng-message="email">
+                    You did not enter your email address correctly
+                </div>
+            </div>
 
-            <input name="password" type="password" ng-model="signin.user.password" required>
+            <input name="password" type="password" placeholder="Password" ng-model="signin.user.password" required minlength="6">
             <div ng-messages="form.password.$error" ng-messages-include="messages.html"></div>
 
-            <button>Log in</button>
+            <button>Sign in</button>
         </form>
     </div>
-    <div ng-controller="signupCtrl as signup">
-        <form name="form" novalidate ng-submit="signup.submit(form.$valid)">
-            <input name="email" type="email" required ng-model="signup.user.email">
+    <div ng-controller="createAccountCtrl as createAccount">
+        <form name="form" novalidate ng-submit="createAccount.submit(form.$valid)">
+            <input name="email" type="email" placeholder="Email" required username-available-validator ng-model="createAccount.user.email">
             <div ng-messages="form.email.$error" ng-messages-include="messages.html"></div>
 
-            <input name="password" type="password" required ng-model="signup.user.password">
+            <input name="password" type="password" placeholder="Password" required ng-model="createAccount.user.password">
             <div ng-messages="form.password.$error" ng-messages-include="messages.html"></div>
 
-            <input name="confirmPassword" type="password" required ng-model="signup.user.confirmPassword" compare-to="signup.user.password">
+            <input name="confirmPassword" type="password" placeholder="Confirm password" required ng-model="createAccount.user.confirmPassword" compare-to="signup.user.password">
             <div ng-messages="form.confirmPassword.$error" ng-messages-include="messages.html"></div>
 
-            <button>Sign up</button>
+            <button>Create Account</button>
         </form>
     </div>
     <table>

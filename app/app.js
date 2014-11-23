@@ -11,14 +11,14 @@ angular.module('leanMetrix').controller('signinCtrl', function($scope) {
 
     var model = this;
 
-    model.message = "";
+    this.message = "";
 
-    model.user = {
+    this.user = {
         email: "",
         password: ""
     };
 
-    model.submit = function(isValid) {
+    this.submit = function(isValid) {
         if (isValid) {
             model.message = "Submitted " + model.user.username;
         } else {
@@ -27,19 +27,19 @@ angular.module('leanMetrix').controller('signinCtrl', function($scope) {
     };
 });
 
-angular.module('leanMetrix').controller('signupCtrl', function($scope) {
+angular.module('leanMetrix').controller('createAccountCtrl', function($scope) {
 
     var model = this;
 
-    model.message = "";
+    this.message = "";
 
-    model.user = {
+    this.user = {
         email: "",
         password: "",
         confirmPassword: ""
     };
 
-    model.submit = function(isValid) {
+    this.submit = function(isValid) {
         console.log("hello");
         if (isValid) {
             model.message = "Submitted " + model.user.username;
@@ -68,3 +68,14 @@ angular.module('leanMetrix').directive("compareTo", function() {
         }
     };
 });
+
+angular.module('leanMetrix').directive('usernameAvailableValidator', function($http) {
+    return {
+        require: 'ngModel',
+        link: function($scope, element, attrs, ngModel) {
+            ngModel.$asyncValidators.usernameAvailable = function(username) {
+                return $http.get('/api/username-exists?u=' + username);
+            };
+        }
+    }
+})
