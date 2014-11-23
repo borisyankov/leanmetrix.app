@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="leanMetrix">
+
 <head>
     <script src="../lib/angular/angular.js"></script>
     <script src="../lib/firebase/firebase.js"></script>
@@ -7,6 +8,44 @@
 
     <script src="app.js"></script>
 </head>
+
 <body>
+    <div ng-controller="signinCtrl as signin">
+        <form name="form" novalidate ng-submit="signin.submit(form.$valid)">
+            <input name="email" type="email" ng-model="signin.user.email" required>
+            <div ng-messages="form.email.$error" ng-messages-include="messages.html"></div>
+
+            <input name="password" type="password" ng-model="signin.user.password" required>
+            <div ng-messages="form.password.$error" ng-messages-include="messages.html"></div>
+
+            <button>Log in</button>
+        </form>
+    </div>
+    <div ng-controller="signupCtrl as signup">
+        <form name="form" novalidate ng-submit="signup.submit(form.$valid)">
+            <input name="email" type="email" required ng-model="signup.user.email">
+            <div ng-messages="form.email.$error" ng-messages-include="messages.html"></div>
+
+            <input name="password" type="password" required ng-model="signup.user.password">
+            <div ng-messages="form.password.$error" ng-messages-include="messages.html"></div>
+
+            <input name="confirmPassword" type="password" required ng-model="signup.user.confirmPassword" compare-to="signup.user.password">
+            <div ng-messages="form.confirmPassword.$error" ng-messages-include="messages.html"></div>
+
+            <button>Sign up</button>
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>Email</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>∫
+        </tbody>
+    </table>
 </body>
+
 </html>
