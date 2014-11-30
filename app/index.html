@@ -11,6 +11,16 @@
     <script src="app.js"></script>
 
     <style>
+        @font-face {
+            font-family: Din;
+            src: url(./img/DINRoundPro-Light.woff);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body, button, input {
+            font-family: Din, Verdana, Helvetica;
+        }
         .ng-invalid {
             border-color: red;
             outline-color: red;
@@ -24,6 +34,55 @@
             padding-top: 5px;
             padding-bottom: 10px;
             color: red;
+        }
+        .form-container {
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
+            padding: 1em;
+        }
+        .form-container input {
+            width: 100%;
+        }
+        button {
+            color: #dc1732;
+            background: white;
+            border: 1px solid #dc1732;
+            border-radius: 3px;
+            padding: .75em 2em;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        button, input {
+            font-size: 1em;
+        }
+        button:hover {
+            color: white;
+            background: #dc1732;
+        }
+        input[type=text], input[type=email], input[type=password] {
+            border: 1px solid #ccc;
+            padding: .5em;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        }
+        .errors {
+            color: #dc1732;
+            padding: .25em .5em;
+            height: 2em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        th {
+            background: #dc1732;
+            color: white;
+            text-transform: uppercase;
+            padding: .5em;
+        }
+        td {
+            padding: .5em;
         }
     </style>
 </head>
@@ -40,39 +99,66 @@
     <div ng-controller="signInCtrl as signin" ng-hide="$rootScope.authData">
         !{{ $rootScope.authData }}!
         <h1>Sign In</h1>
-        <form name="form" novalidate ng-submit="signin.submit(form.$valid)">
-            <input name="email" type="email" placeholder="Email" ng-model="signin.user.email" required>
-            <div ng-messages="form.email.$error" ng-messages-include="messages.html"></div>
-            <div ng-messages="form.email.$error">
-                <div ng-message="required">
-                    You can't leave this empty.
+        <div class="form-container">
+            <form name="form" novalidate ng-submit="signin.submit(form.$valid)">
+                <input name="email" type="email" placeholder="Email" ng-model="signin.user.email" required>
+                <div class="errors" ng-messages="form.email.$error">
+                    <div ng-message="required">
+                        You can't leave this empty.
+                    </div>
+                    <div ng-message="email">
+                        You did not enter your email address correctly
+                    </div>
                 </div>
-                <div ng-message="email">
-                    You did not enter your email address correctly
+
+                <input name="password" type="password" placeholder="Password" ng-model="signin.user.password" required minlength="6">
+                <div class="errors" ng-messages="form.password.$error">
+                    <div ng-message="required">
+                        You can't leave this empty.
+                    </div>
+                    <div ng-message="minlength">
+                        Your password is too short, 6 characters or more, please
+                    </div>
                 </div>
-            </div>
 
-            <input name="password" type="password" placeholder="Password" ng-model="signin.user.password" required minlength="6">
-            <div ng-messages="form.password.$error" ng-messages-include="messages.html"></div>
-
-            <button>Sign in</button>
-        </form>
+                <button>Sign in</button>
+            </form>
+        </div>
     </div>
     <div ng-controller="createAccountCtrl as createAccount">
         <h1>Create Account</h1>
-        <form name="form" novalidate ng-submit="createAccount.submit(form.$valid)">
-            <input name="email" type="email" placeholder="Email" required username-available-validator ng-model="createAccount.user.email">
-            <div ng-messages="form.email.$error" ng-messages-include="messages.html"></div>
+        <div class="form-container">
+            <form name="form" novalidate ng-submit="createAccount.submit(form.$valid)">
+                <input name="email" type="email" placeholder="Email" required username-available-validator ng-model="createAccount.user.email">
+                <div class="errors" ng-messages="form.email.$error">
+                    <div ng-message="required">
+                        You can't leave this empty.
+                    </div>
+                    <div ng-message="email">
+                        You did not enter your email address correctly
+                    </div>
+                </div>
 
-            <input name="password" type="password" placeholder="Password" required ng-model="createAccount.user.password">
-            <div ng-messages="form.password.$error" ng-messages-include="messages.html"></div>
+                <input name="password" type="password" placeholder="Password" required ng-model="createAccount.user.password">
+                <div class="errors" ng-messages="form.password.$error">
+                    <div ng-message="required">
+                        You can't leave this empty.
+                    </div>
+                </div>
 
-            <input name="confirmPassword" type="password" placeholder="Confirm password" required
-                ng-model="createAccount.user.confirmPassword" compare-to="createAccount.user.password">
-            <div ng-messages="form.confirmPassword.$error" ng-messages-include="messages.html"></div>
-
-            <button>Create Account</button>
-        </form>
+                <input name="confirmPassword" type="password" placeholder="Confirm password" required
+                    ng-model="createAccount.user.confirmPassword" compare-to="createAccount.user.password">
+                <div class="errors" ng-messages="form.confirmPassword.$error">
+                    <div ng-message="required">
+                        Retype your password
+                    </div>
+                    <div ng-message="compareTo">
+                        Your passwords do not match
+                    </div>
+                </div>
+                <button>Create Account</button>
+            </form>
+        </div>
     </div>
     <div ng-controller="messagesCtrl as ctrl">
         <h1>Messages</h1>
