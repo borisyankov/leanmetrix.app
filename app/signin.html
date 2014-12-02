@@ -1,0 +1,29 @@
+<div ng-controller="signInCtrl as signin" ng-hide="$rootScope.authData">
+    !{{ $rootScope.authData }}!
+    <h1>Sign In</h1>
+    <div class="form-container">
+        <form name="form" novalidate ng-submit="signin.submit(form.$valid)">
+            <input name="email" type="email" placeholder="Email" ng-model="signin.user.email" required>
+            <div class="errors" ng-messages="form.email.$error">
+                <div ng-message="required">
+                    You can't leave this empty.
+                </div>
+                <div ng-message="email">
+                    You did not enter your email address correctly
+                </div>
+            </div>
+
+            <input name="password" type="password" placeholder="Password" ng-model="signin.user.password" required minlength="6">
+            <div class="errors" ng-messages="form.password.$error">
+                <div ng-message="required">
+                    You can't leave this empty.
+                </div>
+                <div ng-message="minlength">
+                    Your password is too short, 6 characters or more, please
+                </div>
+            </div>
+
+            <button>Sign in</button>
+        </form>
+    </div>
+</div>

@@ -1,7 +1,20 @@
-<div class="messages">
-    <div ng-message="required">Required</div>
-    <div ng-message="minlength">Too short</div>
-    <div ng-message="maxlength">Too long</div>
-    <div ng-message="email">Invalid email address</div>
-    <div ng-message="compareTo">Must match the previous entry</div>
+<div ng-controller="messagesCtrl as ctrl">
+    <h1>Messages</h1>
+    Message count: {{ ctrl.data.length }}
+    <table>
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>Email</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="message in ctrl.data">
+                <td>{{message.name}}</td>
+                <td>{{message.email}}</td>
+                <td>{{message.message}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -6,13 +6,16 @@
     box-sizing: border-box;
     transition: all 0.3;
 }
-div, span {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+div,
+span {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-body, button, input {
+body,
+button,
+input {
     font-family: Din, Verdana, Helvetica;
 }
 .content {
@@ -53,14 +56,17 @@ button {
 button:focus {
     outline: none;
 }
-button, input {
+button,
+input {
     font-size: 1em;
 }
 button:hover {
     color: white;
     background: #dc1732;
 }
-input[type=text], input[type=email], input[type=password] {
+input[type=text],
+input[type=email],
+input[type=password] {
     border: 1px solid #ccc;
     padding: .5em;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);

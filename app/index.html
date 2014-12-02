@@ -2,6 +2,8 @@
 <html lang="en" ng-app="leanMetrix">
 
 <head>
+    <title>LeanMetrix</title>
+
     <link href="style.css" rel="stylesheet">
 
     <script src="../lib/angular/angular.js"></script>
@@ -11,105 +13,24 @@
     <script src="../lib/firebase/angularfire.js"></script>
 
     <script src="app.js"></script>
+    <script src="account-service.js"></script>
+    <script src="auth-ctrl.js"></script>
+    <script src="compareto.js"></script>
+    <script src="create-account-ctrl.js"></script>
+    <script src="messages-ctrl.js"></script>
+    <script src="signin-ctrl.js"></script>
+    <script src="username-available-validator.js"></script>
 </head>
+
 
 <body>
     <div class="content">
-    <h1>LeanMetrix</h1>
-
-    <div ng-controller="authCtrl as auth">
-        <span ng-hide="auth.data">Not Logged In</span>
-        <span ng-bind="auth.data.password.email"></span>
-        <button ng-show="auth.data" ng-click="auth.signOut()">Sign Out</button>
+        <h1>LeanMetrix</h1>
+        <ng-include src="'auth.html'"></ng-include>
+        <ng-include src="'signin.html'"></ng-include>
+        <ng-include src="'create-account.html'"></ng-include>
+        <ng-include src="'messages.html'"></ng-include>
     </div>
-
-    <div ng-controller="signInCtrl as signin" ng-hide="$rootScope.authData">
-        !{{ $rootScope.authData }}!
-        <h1>Sign In</h1>
-        <div class="form-container">
-            <form name="form" novalidate ng-submit="signin.submit(form.$valid)">
-                <input name="email" type="email" placeholder="Email" ng-model="signin.user.email" required>
-                <div class="errors" ng-messages="form.email.$error">
-                    <div ng-message="required">
-                        You can't leave this empty.
-                    </div>
-                    <div ng-message="email">
-                        You did not enter your email address correctly
-                    </div>
-                </div>
-
-                <input name="password" type="password" placeholder="Password" ng-model="signin.user.password" required minlength="6">
-                <div class="errors" ng-messages="form.password.$error">
-                    <div ng-message="required">
-                        You can't leave this empty.
-                    </div>
-                    <div ng-message="minlength">
-                        Your password is too short, 6 characters or more, please
-                    </div>
-                </div>
-
-                <button>Sign in</button>
-            </form>
-        </div>
-    </div>
-    <div ng-controller="createAccountCtrl as createAccount">
-        <h1>Create Account</h1>
-        <div class="form-container">
-            <form name="form" novalidate ng-submit="createAccount.submit(form.$valid)">
-                <input name="email" type="email" placeholder="Email" required username-available-validator ng-model="createAccount.user.email">
-                <div class="errors" ng-messages="form.email.$error">
-                    <div ng-message="required">
-                        You can't leave this empty.
-                    </div>
-                    <div ng-message="email">
-                        You did not enter your email address correctly
-                    </div>
-                </div>
-
-                <input name="password" type="password" placeholder="Password" required ng-model="createAccount.user.password">
-                <div class="errors" ng-messages="form.password.$error">
-                    <div ng-if="form.$submitted">
-                        <div ng-message="required">
-                            You can't leave this empty.
-                        </div>
-                    </div>
-                </div>
-
-                <input name="confirmPassword" type="password" placeholder="Confirm password" required
-                    ng-model="createAccount.user.confirmPassword" compare-to="createAccount.user.password">
-                <div class="errors" ng-messages="form.confirmPassword.$error">
-                    <div ng-message="required">
-                        Retype your password
-                    </div>
-                    <div ng-message="compareTo">
-                        Your passwords do not match
-                    </div>
-                </div>
-                <button>Create Account</button>
-            </form>
-        </div>
-    </div>
-    <div ng-controller="messagesCtrl as ctrl">
-        <h1>Messages</h1>
-        Message count: {{ ctrl.data.length }}
-        <table>
-            <thead>
-                <tr>
-                    <th>From</th>
-                    <th>Email</th>
-                    <th>Message</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="message in ctrl.data">
-                    <td>{{message.name}}</td>
-                    <td>{{message.email}}</td>
-                    <td>{{message.message}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 </body>
 
 </html>

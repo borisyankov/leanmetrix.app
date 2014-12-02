@@ -1,0 +1,37 @@
+<div ng-controller="createAccountCtrl as createAccount">
+    <h1>Create Account</h1>
+    <div class="form-container">
+        <form name="form" novalidate ng-submit="createAccount.submit(form.$valid)">
+            <input name="email" type="email" placeholder="Email" required username-available-validator ng-model="createAccount.user.email">
+            <div class="errors" ng-messages="form.email.$error">
+                <div ng-message="required">
+                    You can't leave this empty.
+                </div>
+                <div ng-message="email">
+                    You did not enter your email address correctly
+                </div>
+            </div>
+
+            <input name="password" type="password" placeholder="Password" required ng-model="createAccount.user.password">
+            <div class="errors" ng-messages="form.password.$error">
+                <div ng-if="form.$submitted">
+                    <div ng-message="required">
+                        You can't leave this empty.
+                    </div>
+                </div>
+            </div>
+
+            <input name="confirmPassword" type="password" placeholder="Confirm password" required
+                ng-model="createAccount.user.confirmPassword" compare-to="createAccount.user.password">
+            <div class="errors" ng-messages="form.confirmPassword.$error">
+                <div ng-message="required">
+                    Retype your password
+                </div>
+                <div ng-message="compareTo">
+                    Your passwords do not match
+                </div>
+            </div>
+            <button>Create Account</button>
+        </form>
+    </div>
+</div>
