@@ -11,13 +11,7 @@ angular.module('leanMetrix').controller('signInCtrl', function(AccountService) {
 
     this.submit = function(isValid) {
         if (isValid) {
-            AccountService.signIn(model.user.email, model.user.password).success(function(data) {
-                AuthenticationService.isLogged = true;
-                $window.sessionStorage.token = data.token;
-                $location.path("/admin");
-            }).error(function(status, data) {
-                console.log(status, data);
-            });
+            AccountService.signIn(model.user.email, model.user.password);
         } else {
             model.message = "There are still invalid fields below";
         }

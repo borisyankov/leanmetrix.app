@@ -18,7 +18,8 @@ var paths = {
     ],
     style: './public/style.scss',
     templates: [
-        'app/*.html'
+        '!app/index.html',
+        'app/**/*.html'
     ]
 };
 
@@ -28,19 +29,19 @@ gulp.task('clean', function(cb) {
 
 gulp.task('lib', ['clean'], function() {
     return gulp.src(paths.lib)
-        //.pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
             .pipe(uglify())
             .pipe(concat('lib.min.js'))
-        //.pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('app', ['clean'], function() {
     return gulp.src(paths.app)
-        //.pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
             .pipe(uglify({ mangle: false }))
             .pipe(concat('app.min.js'))
-        //.pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('dist'));
 });
 
