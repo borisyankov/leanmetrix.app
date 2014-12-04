@@ -13,9 +13,12 @@
 
 
 <body>
+    <header>
+        <img class="logo" src="/img/lean-metrix-logo.svg"></img>
+        <ng-include class="auth-panel" src="'auth/auth.html'"></ng-include>
+    </header>
     <div class="content">
-        <h1>LeanMetrix</h1>
-        <ng-include src="'auth/auth.html'"></ng-include>
+
         <ng-include ng-if="!$root.authData" src="'signin/signin.html'" style="width: 48%; float: left"></ng-include>
         <ng-include ng-if="!$root.authData" src="'create-account/create-account.html'" style="width: 48%; float: left; margin-left: 4%"></ng-include>
         <ng-include ng-if="$root.authData" src="'messages/messages.html'"></ng-include>

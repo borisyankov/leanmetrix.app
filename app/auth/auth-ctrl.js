@@ -1,9 +1,9 @@
 angular.module('leanMetrix').controller('authCtrl', function($rootScope) {
-    
+
     var model = this;
 
     firebase.onAuth(function(authData) {
-        model.data = authData;
+        console.log(authData);
         $rootScope.authData = authData;
     });
 

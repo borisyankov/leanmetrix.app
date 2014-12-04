@@ -1,13 +1,26 @@
 @font-face {
     font-family: Din;
-    src: url(./img/DINRoundPro-Light.woff);
+    src: url(/img/DINRoundPro-Light.woff);
 }
 * {
     box-sizing: border-box;
     transition: all 0.3;
 }
 body {
+    margin: 0;
     background-color: #f8f8f8;
+}
+header {
+    height: 80px;
+    padding: 1em;
+    background-color: #2f3747;
+}
+.logo {
+    height: 100%;
+}
+.auth-panel {
+    color: white;
+    float: right;
 }
 div,
 span {
@@ -50,9 +63,9 @@ input {
     width: 100%;
 }
 button {
-    color: #dc1732;
+    color: #cb2040;
     background: white;
-    border: 1px solid #dc1732;
+    border: 1px solid #cb2040;
     border-radius: 3px;
     padding: .75em 2em;
     cursor: pointer;
@@ -92,7 +105,7 @@ table {
     overflow: hidden;
 }
 th {
-    background: #dc1732;
+    background: #cb2040;
     color: white;
     text-transform: uppercase;
     padding: .5em;

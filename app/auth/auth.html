@@ -1,6 +1,6 @@
 <div ng-controller="authCtrl as auth">
-    <span ng-hide="auth.data">Not Logged In</span>
-    <span ng-bind="auth.data.password.email"></span>
+    <span ng-hide="$root.authData">Not Logged In</span>
+    <span ng-bind="$root.authData.password.email"></span>
     <!-- <button ng-hide="auth.data" ng-click="auth.signIn()">Signin</button> -->
-    <button ng-show="auth.data" ng-click="auth.signOut()">Sign Out</button>
+    <button ng-show="$root.authData" ng-click="auth.signOut()">Sign Out</button>
 </div>
