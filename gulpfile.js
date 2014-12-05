@@ -4,10 +4,11 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var templateCache = require('gulp-angular-templatecache');
+var autoprefixer = require('gulp-autoprefixer');
 var del = require('del');
 
 var paths = {
-    dest: '../leanmetrix.com/',
+    dest: '../leanmetrix.com',
     html: 'index.html',
     lib: [
         'lib/angular/angular.js',
@@ -39,6 +40,10 @@ gulp.task('style', ['clean'], function() {
     return gulp.src(paths.style)
         //.pipe(sourcemaps.init())
         //    .pipe(sass())
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
         //.pipe(sourcemaps.write())
         .pipe(gulp.dest(paths.dest));
 });
@@ -61,7 +66,7 @@ gulp.task('app', ['clean'], function() {
         .pipe(gulp.dest(paths.dest));
 });
 
-gulp.task('templates', function () {
+gulp.task('templates', ['clean'], function () {
     return gulp.src(paths.templates)
         .pipe(templateCache({ module: 'leanMetrix' }))
         .pipe(gulp.dest(paths.dest));

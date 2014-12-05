@@ -1,5 +1,5 @@
 
-angular.module('leanMetrix').directive('usernameAvailableValidator', function($q, AccountService) {
+angular.module('leanMetrix').directive('usernameAvailableValidator', function($q, AuthService) {
     return {
         require: 'ngModel',
         link: function($scope, element, attrs, ngModel) {
@@ -7,7 +7,7 @@ angular.module('leanMetrix').directive('usernameAvailableValidator', function($q
                 var deferred = $q.defer();
                 deferred.resolve(false);
                 return deferred.promise;
-                return AccountService.exist(email);
+                return AuthService.exist(email);
             };
         }
     }

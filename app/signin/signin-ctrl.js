@@ -1,4 +1,4 @@
-angular.module('leanMetrix').controller('signInCtrl', function(AccountService) {
+angular.module('leanMetrix').controller('signInCtrl', function(AuthService) {
 
     var model = this;
 
@@ -11,7 +11,7 @@ angular.module('leanMetrix').controller('signInCtrl', function(AccountService) {
 
     this.submit = function(isValid) {
         if (isValid) {
-            AccountService.signIn(model.user.email, model.user.password);
+            AuthService.signIn(model.user.email, model.user.password);
         } else {
             model.message = "There are still invalid fields below";
         }

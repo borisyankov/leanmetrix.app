@@ -1,4 +1,4 @@
-angular.module('leanMetrix').controller('createAccountCtrl', function(AccountService) {
+angular.module('leanMetrix').controller('createAccountCtrl', function(AuthService) {
 
     var model = this;
 
@@ -12,7 +12,7 @@ angular.module('leanMetrix').controller('createAccountCtrl', function(AccountSer
 
     this.submit = function(isValid) {
         if (isValid) {
-            AccountService.create(model.user.email, model.user.password).success(function(data) {
+            AuthService.create(model.user.email, model.user.password).success(function(data) {
                 AuthenticationService.isLogged = true;
                 $window.sessionStorage.token = data.token;
                 $location.path("/admin");
