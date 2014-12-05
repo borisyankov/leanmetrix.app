@@ -1,7 +1,7 @@
 {
   "name": "LeanMetrix",
   "version": "0.0.0",
-  "description": "leanmetrix.app\r ==============",
+  "description": "LeanMetrix",
   "main": "index.js",
   "scripts": {
     "build": "node --harmony node_modules/gulp/bin/gulp.js",
@@ -22,6 +22,7 @@
     "gulp": "~3.8.10",
     "gulp-angular-templatecache": "^1.4.2",
     "gulp-concat": "^2.4.2",
+    "gulp-copy": "0.0.2",
     "gulp-sourcemaps": "^1.2.8",
     "gulp-uglify": "^1.0.1"
   }
