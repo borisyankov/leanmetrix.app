@@ -1,12 +1,11 @@
-angular.module('leanMetrix').controller('domainsCtrl', function($firebase, AuthService) {
+angular.module('leanMetrix').controller('domainsCtrl', function($firebase, FirebaseService) {
 
     var model = this;
 
-    var firebaseUserUrl = 'https://leanmetrix.firebaseio.com/' + AuthService.currentUser().replace('.', '@');
-    var firebase = new Firebase(firebaseUserUrl + '/domains/');
+    var firebase = FirebaseService.getInstance('/domains/');
     var sync = $firebase(firebase);
 
-    this.domains = sync.$asArray();
+
     console.log(this.domains);
 
     this.addDomain = function() {

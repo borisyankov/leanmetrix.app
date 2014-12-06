@@ -73,6 +73,7 @@ gulp.task('templates', ['clean'], function () {
 });
 
 gulp.task('watch', function() {
+    gulp.watch(paths.templates, ['templates']);
     gulp.watch(paths.style, ['style']);
     gulp.watch(paths.lib, ['lib']);
     gulp.watch(paths.app, ['app']);

@@ -1,5 +1,6 @@
 angular.module('leanMetrix').factory('AuthService', function($firebase, $http, $rootScope) {
 
+    var apiRoot = 'http://localhost:3000';
     //var firebase = new Firebase("https://leanmetrix.firebaseio.com/");
 
     return {
@@ -16,15 +17,20 @@ angular.module('leanMetrix').factory('AuthService', function($firebase, $http, $
             });
         },
         create: function(email, password) {
-            firebase.createUser({
+
+            var account = {
                 email: email,
                 password: password,
-            }, function(error) {
+            };
+
+            firebase.createUser(account, function(error) {
                 console.log(error);
             });
+
+             $http.post(apiRoot + '/createaccount/', account);
         },
         exist: function(email) {
-            return $http.get('http://localhost:3000/users/?email=' + email);
+            return $http.get(apiRoot + '/users/?email=' + email);
         },
         currentUser: function() {
             return $rootScope.authData.password.email;

@@ -113,6 +113,7 @@ tr:hover {
     background: #dc1732;
 }
 th {
+    text-align: left;
     background: #2f3747;
     color: white;
     text-transform: uppercase;

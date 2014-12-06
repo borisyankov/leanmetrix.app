@@ -1,18 +1,23 @@
 <div ng-controller="messagesCtrl as ctrl">
     <h1>Messages</h1>
+    <p>
+        <select ng-model="currentDomain" ng-options="value.$value for (id, value) in ctrl.domains"></select>
+    </p>
     <table>
         <thead>
             <tr>
+                <th>Time</th>
                 <th>From</th>
                 <th>Email</th>
                 <th>Message</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="message in ctrl.data">
-                <td>{{message.name}}</td>
-                <td>{{message.email}}</td>
-                <td>{{message.message}}</td>
+            <tr ng-repeat="msg in ctrl.messages">
+                <td>{{ msg.timestamp | date }}</td>
+                <td>{{ msg.name }}</td>
+                <td>{{ msg.email }}</td>
+                <td>{{ msg.message }}</td>
             </tr>
         </tbody>
     </table>
