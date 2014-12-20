@@ -3,8 +3,10 @@ angular.module('leanMetrix').controller('authCtrl', function($rootScope) {
     var model = this;
 
     firebase.onAuth(function(authData) {
-        //console.log(authData);
+
         $rootScope.authData = authData;
+
+        if (!$rootScope.$$phase) $rootScope.$apply();        
     });
 
     this.signOut = function() {
